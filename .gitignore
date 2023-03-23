@@ -1,0 +1,7 @@
+text.txt
+words.txt
+*.o
+generate
+cleantext
+*.exe
+sample*.txt

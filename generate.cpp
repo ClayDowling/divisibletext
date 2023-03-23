@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -6,42 +7,50 @@
 #include <vector>
 
 using std::cout;
+using std::cerr;
 using std::ifstream;
 using std::string;
+using std::sort;
 using std::endl;
 using std::vector;
+
+void readfile(vector<string>& list, const char* filename) {
+    ifstream in(filename);
+    string word;
+    while(in) {
+        in >> word;
+        list.push_back(word);
+    }
+    in.close();
+}
 
 int main(int argc, const char *argv[]) {
 
     srand(time(0));
-    ifstream text("text.txt");
-
+    vector<string> selections;
+    vector<string> text;
+    readfile(text, "text.txt");
     int textwords = rand() % 3 + 3;
-    int textstart = rand() % 122580;  
-    string tword;
+    int textstart = rand() % text.size();  
 
-    for(int i=0; i < textstart; ++i) {
-        text >> tword;
+    bool solvable = (rand() % 10 < 5);
+    for(int i=textstart; i < textstart + textwords; ++i) {
+        if (solvable) selections.push_back(text[i]);
+        cout << text[i];
     }
-
-    for(int i=0; i < textwords; ++i) {
-        text >> tword;
-        cout << tword;
-    }
-    text.close();
     cout << endl;
-    
-    ifstream words("words.txt");
+
     vector<string> dictionary;
-    while(words) {
-        words >> tword;
-        dictionary.push_back(tword);
-    }
-    words.close();
+    readfile(dictionary, "words.txt");
 
     int numwords = rand() % 194 + 6;
     for(int i=0; i < numwords; ++i) {
-        cout << dictionary[rand() % dictionary.size()] << endl;
+        selections.push_back(dictionary[rand() % dictionary.size()]);
+    }
+    sort(selections.begin(), selections.end());
+
+    for(auto w: selections) {
+        cout << w << endl;
     }
 
     return 0;
