@@ -10,6 +10,9 @@ cleantext: cleantext.o
 generate: generate.o text.txt words.txt
 	$(CXX) generate.o -o $@
 
+divisibletext: divisibletext.o
+	$(CXX) $^ -o $@
+
 text.txt: pride-and-prejudice.txt cleantext
 	./cleantext pride-and-prejudice.txt > text.txt
 

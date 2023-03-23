@@ -3,5 +3,6 @@ words.txt
 *.o
 generate
 cleantext
+divisibletext
 *.exe
 sample*.txt
