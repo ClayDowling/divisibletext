@@ -43,7 +43,7 @@ int main(int argc, const char *argv[]) {
     vector<string> dictionary;
     readfile(dictionary, "words.txt");
 
-    int numwords = rand() % 194 + 6;
+    int numwords = rand() % (200 - textwords) + textwords;
     for(int i=0; i < numwords; ++i) {
         selections.push_back(dictionary[rand() % dictionary.size()]);
     }
